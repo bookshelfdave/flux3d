@@ -9,8 +9,9 @@
 
 <script type="text/javascript">
 	$(document).ready(function() {
- 		Flux.init();	
- 		Flux.createScene($("#glcanvas0"));
+		// jquery selector didn't work here...
+ 		var g = Flux.createScene(document.getElementById("glcanvas0"));
+ 		g.setupGl();
  	});
 </script>
 </head>

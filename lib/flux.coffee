@@ -1,16 +1,26 @@
 
 window.Flux ||= {}
-
 window.Flux.fluxScenes ||= []
 
-class Scene
-  constructor: (@canvas) ->
-  allocateBuffers: ->
-  	@objects = []
 
-  objects: ->
-  	@objects
+Flux.init = () -> 
+	alert("Initializing Flux!")
   
+Flux.createScene = (c) ->
+	scene = new Scene(c)
+	window.Flux.fluxScenes.push scene
+	scene
+	  
+class Scene
+	constructor: (canvas) ->
+		@canvas = canvas
+		# coffeescript didn't like try/catch in a constructor
+	setupGl: () ->
+		try
+			@gl = @canvas.getContext("webgl") || @canvas.getContext("experimental-webgl")
+		catch e  
+			alert("Unable to initialize WebGL. Your browser may not support it.")
+
 class Selectable
 	select: () ->
 		@selected = true
@@ -53,10 +63,3 @@ class Obj3d extends Selectable
 	
 
 
-Flux.init = (activeCanvas) -> 
-	alert("Initializing Flux!")
-
-Flux.createScene = (canvas) ->
-	s = new Scene canvas
-	window.Flux.fluxScenes.push s
-	
