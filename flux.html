@@ -3,22 +3,106 @@
 	<title>Flux3d</title>
 
 	<script type="text/javascript" src="lib/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="lib/jquery-ui-1.8.17.custom.min.js"></script>
+
 	<script type="text/javascript" src="lib/mjs.js"></script>
 	<script type="text/javascript" src="lib/sinon-1.3.1.js"></script>
 	<script type="text/javascript" src="lib/flux.js"></script>
+	<link type="text/css" href="css/smoothness/jquery-ui-1.8.17.custom.css" rel="stylesheet" />
+	
+	<link rel="stylesheet" href="css/bootstrap.min.css">
 
-<script type="text/javascript">
-	$(document).ready(function() {
-		// jquery selector didn't work here...
- 		var g = Flux.createScene(document.getElementById("glcanvas0"));
- 		g.setupGl();
- 	});
-</script>
+	<style>
+		div.scenestats {
+	    display:block;	    
+	    position:absolute;
+	    top:0;
+	    right:0;	    
+  	}
+	</style>
+			
+	<script type="text/javascript">
+		$(document).ready(function() {
+			// jquery selector didn't work here...		
+	 		$('#mainmenu').hide();
+
+			webGLStart();
+	 		//var g = Flux.createScene(document.getElementById("glcanvas0"));
+	 		//g.setupGl();
+	 		
+	 	});
+
+	 	$(function() {
+			$(document).keydown(function(event) {			  
+			  if (event.keyCode == 32) {
+			     event.preventDefault();
+				$('#mainmenu').show();
+			   }			   
+			});			
+
+			$(document).keyup(function(event) {			  
+			  if (event.keyCode == 32) {
+			     event.preventDefault();
+				$('#mainmenu').hide();
+			   }			   
+			});
+			
+			$('#selections').buttonset();			
+		});
+
+	</script>
+
 </head>
 
 <body>
 
-<canvas id="glcanvas0" style="border: none;" width="500" height="500"></canvas>
+
+<div class="scenestats">
+	<span>0 Objects</span>	
+	<span>0 Faces</span>	
+	<span>0 Edges</span>	
+	<span>0 Verts</span>	
+</div>
+
+<div id="mainmenu" style="position: relative; width: 96%; height: 400; padding:1% 4%; overflow:hidden;" class="fakewindowcontain">
+		
+	<!-- ui-dialog -->
+	<div class="ui-overlay"><div class="ui-widget-overlay"></div>
+		<div class="ui-widget-shadow ui-corner-all" 
+			style="width: 602px; height: 152px; position: absolute; left: 50px; top: 30px;">
+		</div>
+	</div>
+
+	<div style="position: absolute; width: 580px; height: 130px;left: 50px; top: 30px; padding: 10px;" class="ui-widget ui-widget-content ui-corner-all">
+		<div id="selections">
+			<input type="radio" id="selObjs" name="radio" />
+				<label for="selObjs">Objects</label>
+			<input type="radio" id="selFaces" name="radio" checked="checked" />
+				<label for="selFaces">Faces</label>
+			<input type="radio" id="selEdges" name="radio" />
+				<label for="selEdges">Edges</label>
+			<input type="radio" id="selVerts" name="radio" />
+				<label for="selVerts">Verts</label>
+		</div>
+	</div>
+</div>
+
+	
+<div class="content" bgcolor="black">
+		<canvas id="glcanvas0" style="border: none;" width="100%" height="100%"></canvas>    
+</div>
+
+
+
+<!-- SHADERS -->
+<!-- SHADERS -->
+<!-- SHADERS -->
+<!-- SHADERS -->
+
+<!-- END SHADERS -->
+<!-- END SHADERS -->
+<!-- END SHADERS -->
+<!-- END SHADERS -->
 
 </body>
 </html>
